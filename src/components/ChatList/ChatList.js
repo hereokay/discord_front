@@ -1,6 +1,13 @@
 import React from 'react';
 import './ChatList.css';
 
+
+function MyComponent({ highlightedText }) {
+  return (
+    <span className="chat-message" dangerouslySetInnerHTML={{ __html: highlightedText }} />
+  );
+}
+
 function ChatList({ messages }) {
   // Assuming 'chats' is the state that holds chat data
   function formatDateTime(dateTimeStr) {
@@ -17,19 +24,15 @@ function ChatList({ messages }) {
     // 원하는 형식으로 문자열을 반환합니다.
     return `${month}/${day} ${hours}:${minutes}`;
   }
-  
-  // 사용 예시
-  const formattedDate = formatDateTime("2024-01-25T10:07:44.249000+00:00");
-  console.log(formattedDate); // 출력:
-  
 
+  
   return (
     <section className="chat-list">
       {[...messages].reverse().map((msg) => (
         <div key={msg._id} className="chat-item">
           <span className="chat-time">{formatDateTime(msg.timeStamp)}</span>
           <span className="chat-name">{msg.userName}</span>
-          <span className="chat-message">{msg.content}</span>
+          <MyComponent highlightedText={msg.content} />
         </div>
       ))}
     </section>
