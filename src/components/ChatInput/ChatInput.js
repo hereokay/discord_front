@@ -65,7 +65,8 @@ function ChatInput({ onNewMessages }) {
       })
       
       onNewMessages(data)
-      console.log(data); // 여기에 검색 결과 처리 로직을 추가할 수 있습니다.
+      
+      //console.log(data); // 여기에 검색 결과 처리 로직을 추가할 수 있습니다.
 
     } catch (error) {
       console.error('검색 요청 실패:', error);

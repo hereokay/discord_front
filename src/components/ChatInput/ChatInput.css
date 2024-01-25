@@ -50,6 +50,7 @@
     box-sizing: border-box;
     padding: 6rem 1.5rem;
     margin: auto;
+    width: 300px;
 }
 input {
     text-size-adjust: 100%;
