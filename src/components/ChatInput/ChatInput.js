@@ -57,7 +57,7 @@ function ChatInput({ onNewMessages }) {
     try {
       
 
-      const response = await fetch('http://localhost:8000/search', {
+      const response = await fetch('http://15.164.105.119:8000/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
