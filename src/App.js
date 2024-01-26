@@ -5,9 +5,7 @@ import './App.css';
 
 function App() {
   const [messages, setMessages] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('');
 
-  
   const handleNewMessages = (newMessages) => {
     setMessages(newMessages);
   };

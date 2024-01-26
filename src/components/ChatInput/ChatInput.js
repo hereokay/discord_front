@@ -31,6 +31,7 @@ function ChatInput({ onNewMessages }) {
   const [itemSearch, setItemSearch] = useState('');
   const [optionSearch, setOptionSearch] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  
 
   // 이벤트 핸들러 함수들
   const handleNicknameDuplicateChange = (e) => {
@@ -56,7 +57,7 @@ function ChatInput({ onNewMessages }) {
     try {
       
 
-      const response = await fetch('http://15.164.105.119:8000/search', {
+      const response = await fetch('http://localhost:8000/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -73,6 +74,7 @@ function ChatInput({ onNewMessages }) {
       }
 
       const data = await response.json();
+      
 
       data.map((msg) =>{
         msg.content = highlightKeyword(msg.content,itemSearch,optionSearch);
@@ -123,14 +125,11 @@ function ChatInput({ onNewMessages }) {
         <button className='searchButton' onClick={handleSubmit}>검색</button>
         {errorMessage && <div className="error-message">검색할 채팅이 2글자 이상인지 확인해주세요</div>}
         <div className='notice'>
-          <div className='text'>
+        <div className='text'>
             중복된 채팅은 한번만 노출됩니다.
           </div>
           <div className='text'>
             기타문의 : hereokay88@gmail.com
-          </div>
-          <div className='text'>
-            개발 초기 UI입니다. 빠르게 개선하겠습니다
           </div>
         </div>
         <div>

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "메랜검색",
+  "name": "메랜 디코 검색사이트",
   "icons": [
     {
       "src": "favicon.ico",
