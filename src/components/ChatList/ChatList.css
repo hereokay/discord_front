@@ -30,17 +30,21 @@
   .chat-time {
     margin-right: 10px;
     width: 100px; /* chat-time의 너비를 고정합니다. */
-
     /* Additional styling */
     
   }
   
   .chat-name {
+    color: skyblue;
     width: 300px;
     margin-right: 10px;
     font-weight: bold;
     /* Additional styling */
     width: 150px;
+    cursor: pointer;
+  }
+  .chat-name:hover {
+    color: #551A8B; /* 마우스 오버 시 색상 변경 */
   }
   
   .chat-message {

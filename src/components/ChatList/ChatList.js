@@ -24,14 +24,18 @@ function ChatList({ messages }) {
     // 원하는 형식으로 문자열을 반환합니다.
     return `${month}/${day} ${hours}:${minutes}`;
   }
+  const handleClick = (msg) => {
+    let baseURI = "https://discord.com/channels/"; // 기본 URL
+    let url = baseURI + msg.guildId +"/" + msg.channelId +"/" + msg.msgId;
+    window.open(url, '_blank');
+  };
 
-  
   return (
     <section className="chat-list">
       {[...messages].reverse().map((msg) => (
         <div key={msg._id} className="chat-item">
           <span className="chat-time">{formatDateTime(msg.timeStamp)}</span>
-          <span className="chat-name">{msg.userName}</span>
+          <span className="chat-name" onClick={() => handleClick(msg)}>{msg.globalName}</span>
           <MyComponent highlightedText={msg.content} />
         </div>
       ))}
