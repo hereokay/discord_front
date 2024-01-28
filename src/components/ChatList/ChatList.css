@@ -56,16 +56,3 @@
     white-space: pre-wrap;
     text-align: left;
   }
-
-  #scrollToTopBtn {
-    position: fixed; /* 요소의 위치를 화면에 고정 */
-    bottom: 50px;    /* 아래에서 20px 떨어진 위치 */
-    right: 50px;     /* 오른쪽에서 20px 떨어진 위치 */
-    /* 추가적인 스타일링 */
-    padding: 10px;
-    width: 100px;
-    height: 50px;
-    background-color:cadetblue;
-    z-index: 99;     /* 다른 요소들 위에 나타나도록 z-index 설정 */
-  }
-  

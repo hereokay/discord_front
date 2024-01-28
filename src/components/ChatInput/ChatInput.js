@@ -69,11 +69,6 @@ function ChatInput({ onNewMessages }) {
     // 데이터를 서버로 보내는 함수
     try {
       setIsLoading(true)
-      window.scrollTo({
-        top: 0, // 맨 위로 이동
-        behavior: 'smooth' // 부드러운 스크롤 효과
-      });
-    
       const address = process.env.REACT_APP_ADDRESS;
       const response = await fetch(address, {
         method: 'POST',
@@ -115,8 +110,8 @@ function ChatInput({ onNewMessages }) {
 
   return (
     <section className='leftSection'>
-      <div className='h1-text' style={{ color: 'rgb(61, 213, 109)' }}>디코 채팅 검색</div>
       <div className="chatInput">
+        <h1 >디코 채팅 검색하기</h1>
         <div>
           <label>닉네임 포함 검색</label>
           <input
@@ -135,8 +130,17 @@ function ChatInput({ onNewMessages }) {
             placeholder="노우, 잠쩔"
           />
         </div>
+        {/* <div>
+          <label>옵션1 검색</label>
+          <input
+            type="text"
+            value={optionSearch}
+            onChange={handleOptionSearchChange}
+            placeholder="1상"
+          />
+        </div> */}
         <div>
-        <button className='searchButton' onClick={handleSubmit}>{isLoading ? '쿼리중' : '채팅검색'}</button>
+        <button className='searchButton' onClick={handleSubmit}>{isLoading ? '쿼리중' : '버튼'}</button>
         {errorMessage && <div className="error-message">검색할 채팅이 2글자 이상인지 확인해주세요</div>}
         <div className='macro'>
           <input className='macro-btn'
@@ -144,25 +148,23 @@ function ChatInput({ onNewMessages }) {
             checked={isChecked}
             onChange={handleCheckboxChange}
           />
-            <div className='macro-text'>
-              매크로 필터링
-            </div>
+          <div className='macro-text'>
+            매크로 필터링
           </div>
+        </div>
         </div>
         <div className='notice'>
-          <div style={{ color: 'rgb(61, 213, 109)' }}> 
-            기능
+          중복된 채팅은 한번만 노출됩니다.
+        </div>
+        <div>
+          <div className='how-to-use'>
+            사용방법
           </div>
           <div>
-            - 중복채팅 제거
-          </div>
-          <div>
-            - 매크로 필터
-          </div>
-          <div>
-            - 이름 클릭시 디코 메시지로 이동
+              "이름" 클릭하여 디코 채팅으로 이동
           </div>
         </div>
+
       </div>
     </section>
   );

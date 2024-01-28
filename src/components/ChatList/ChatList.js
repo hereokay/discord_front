@@ -38,9 +38,7 @@ function ChatList({ messages }) {
           <span className="chat-name" onClick={() => handleClick(msg)}>{msg.globalName}</span>
           <MyComponent highlightedText={msg.content} />
         </div>
-        
       ))}
-      <button id="scrollToTopBtn">맨 위로</button>
     </section>
   );
 }
