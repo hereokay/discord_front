@@ -32,13 +32,15 @@ function ChatList({ messages }) {
 
   return (
     <section className="chat-list">
-      {[...messages].reverse().map((msg) => (
+      {[...messages].map((msg) => (
         <div key={msg._id} className="chat-item">
           <span className="chat-time">{formatDateTime(msg.timeStamp)}</span>
           <span className="chat-name" onClick={() => handleClick(msg)}>{msg.globalName}</span>
           <MyComponent highlightedText={msg.content} />
         </div>
+        
       ))}
+      <button id="scrollToTopBtn">맨 위로</button>
     </section>
   );
 }
