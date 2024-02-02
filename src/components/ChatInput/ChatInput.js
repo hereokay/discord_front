@@ -126,7 +126,7 @@ function ChatInput({ onNewMessages }) {
           <input
             type="text"
             value={itemSearch}
-            onChange={handleItemSearchChange}
+            onChange={handleItemSearchChange} 
             placeholder="노우, 잠쩔"
           />
         </div>
