@@ -3,6 +3,7 @@ import useSWR from "swr";
 import {
   useChat,
   useCurrentItem,
+  useItemId,
   useItemSidebarOpened,
   useSearchKeyword,
 } from "@/hooks/states";
@@ -31,6 +32,7 @@ function classNames(...classes: any) {
 }
 
 export function ItemList() {
+  const { data: itemId, setData: setItemId } = useItemId();
   const { data: searchKeyword, setData: setSearchKeyword } = useSearchKeyword();
   const { data: currentItem, setData: setCurrentItem } = useCurrentItem();
   const debouncedSearchKeyword = useDebounce<string>(searchKeyword, 500);
@@ -146,13 +148,14 @@ export function ItemList() {
   }
   return (
     <ul role="list" className="divide-y divide-white/5">
-      {data.flat().map((cur: any) => {
+      {data.flat().map((cur: any, _i: number) => {
         // "X"의 개수에 따라 상태 설정
 
         return (
           <li
             onClick={() => {
               setItemSidebarOpened(true);
+              setItemId(_i);
               setCurrentItem(cur);
             }}
             key={cur.id}
