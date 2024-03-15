@@ -4,6 +4,10 @@ import './ChatInput.css'; // 여기에 CSS 스타일을 정의합니다.
 function ChatInput({ onNewMessages }) {
 
   function highlightKeyword(content, keyword, option) {
+
+    content = content.replace(/[@┏━┓┛┗]/g, '');
+
+
     // 키워드와 옵션이 없으면 원본 내용을 반환
     if (!keyword && !option) return content;
 
@@ -25,7 +29,7 @@ function ChatInput({ onNewMessages }) {
     }
 
     return highlightedContent;
-}
+  }
 
 
 
@@ -34,7 +38,7 @@ function ChatInput({ onNewMessages }) {
   const [itemSearch, setItemSearch] = useState('');
   const [optionSearch, setOptionSearch] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [isChecked, setIsChecked] = useState(false); // 체크박스 상태 관리
+  const [isChecked, setIsChecked] = useState(true); // 체크박스 상태 관리
   const [isLoading, setIsLoading] = useState(false);
 
 
@@ -82,12 +86,15 @@ function ChatInput({ onNewMessages }) {
           macro:isChecked
         })
       });
+
+      
   
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
 
       const data = await response.json();
+      console.log((data))
       
       data.map((msg) =>{
         msg.content = highlightKeyword(msg.content,itemSearch,optionSearch);
@@ -140,7 +147,7 @@ function ChatInput({ onNewMessages }) {
           />
         </div> */}
         <div>
-        <button className='searchButton' onClick={handleSubmit}>{isLoading ? '쿼리중' : '버튼'}</button>
+        <button className='searchButton' onClick={handleSubmit}>{isLoading ? '쿼리중' : '검색'}</button>
         {errorMessage && <div className="error-message">검색할 채팅이 2글자 이상인지 확인해주세요</div>}
         <div className='macro'>
           <input className='macro-btn'
@@ -161,7 +168,10 @@ function ChatInput({ onNewMessages }) {
             사용방법
           </div>
           <div>
-              "이름" 클릭하여 디코 채팅으로 이동
+            "이름" 클릭하여 디코 채팅으로 이동
+          </div>
+          <div>
+            <a href='https://open.kakao.com/o/stS2Rhag'>각종 버그 및 오류 문의</a>
           </div>
         </div>
 
