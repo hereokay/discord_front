@@ -1,8 +1,8 @@
 export const activityItems = [
   {
     user: {
-      name: "뇌전수리검",
-      imageUrl: "https://www.avsec365.or.kr/etc/file/image.do?fileId=2305",
+      name: "노가다목장갑",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/1082002/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -12,8 +12,8 @@ export const activityItems = [
   },
   {
     user: {
-      name: "냄비뚜껑",
-      imageUrl: "https://www.avsec365.or.kr/etc/file/image.do?fileId=2309",
+      name: "이카루스의 망토(이속)",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/1102055/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -23,8 +23,8 @@ export const activityItems = [
   },
   {
     user: {
-      name: "낡은 글라디우스",
-      imageUrl: "	https://www.avsec365.or.kr/etc/file/image.do?fileId=2308",
+      name: "이블윙즈",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/1382007/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -34,8 +34,8 @@ export const activityItems = [
   },
   {
     user: {
-      name: "신문지 칼",
-      imageUrl: "https://www.avsec365.or.kr/etc/file/image.do?fileId=2307",
+      name: "허름한 망토",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/1102053/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -45,8 +45,8 @@ export const activityItems = [
   },
   {
     user: {
-      name: "하늘색 우산",
-      imageUrl: "https://www.avsec365.or.kr/etc/file/image.do?fileId=1857",
+      name: "토비 표창",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/2070004/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -56,8 +56,8 @@ export const activityItems = [
   },
   {
     user: {
-      name: "연두색 우산",
-      imageUrl: "	https://www.avsec365.or.kr/etc/file/image.do?fileId=2304",
+      name: "장갑 공격력 주문서 60%",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/2040804/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -67,8 +67,8 @@ export const activityItems = [
   },
   {
     user: {
-      name: "레전드 메이플 우산",
-      imageUrl: "	https://www.avsec365.or.kr/etc/file/image.do?fileId=1829",
+      name: "노란색 우산",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/1302016/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -78,8 +78,8 @@ export const activityItems = [
   },
   {
     user: {
-      name: "메이플 래티넘 브링어",
-      imageUrl: "	https://www.avsec365.or.kr/etc/file/image.do?fileId=2306",
+      name: "냄비 뚜껑",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/1092008/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -89,8 +89,8 @@ export const activityItems = [
   },
   {
     user: {
-      name: "프라우테",
-      imageUrl: "https://www.avsec365.or.kr/etc/file/image.do?fileId=1357",
+      name: "본 헬름",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/1002006/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -100,8 +100,8 @@ export const activityItems = [
   },
   {
     user: {
-      name: "라이온하트 커틀러스",
-      imageUrl: "https://www.avsec365.or.kr/etc/file/image.do?fileId=1972",
+      name: "황갑충",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/1472026/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -115,8 +115,8 @@ export const activityItems = [
 export const banItems = [
   {
     user: {
-      name: "나로",
-      imageUrl: "https://www.avsec365.or.kr/etc/file/image.do?fileId=2310",
+      name: "생명의물",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/5180000/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -126,8 +126,8 @@ export const banItems = [
   },
   {
     user: {
-      name: "v지존v선우v",
-      imageUrl: "https://www.avsec365.or.kr/etc/file/image.do?fileId=2311",
+      name: "캐시 펫(선택식)",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/5000001/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -137,8 +137,8 @@ export const banItems = [
   },
   {
     user: {
-      name: "재영",
-      imageUrl: "	https://www.avsec365.or.kr/etc/file/image.do?fileId=2312",
+      name: "코코넛 열매",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/4000136/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -148,8 +148,8 @@ export const banItems = [
   },
   {
     user: {
-      name: "아아",
-      imageUrl: "https://www.avsec365.or.kr/etc/file/image.do?fileId=2313",
+      name: "네펜데스의 꿀",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/2022039/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -160,8 +160,8 @@ export const banItems = [
   },
   {
     user: {
-      name: "Issang5028",
-      imageUrl: "https://www.avsec365.or.kr/etc/file/image.do?fileId=2314",
+      name: "본 헬름 퀘",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/4031442/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -171,8 +171,8 @@ export const banItems = [
   },
   {
     user: {
-      name: "퓨어페이",
-      imageUrl: "	https://www.avsec365.or.kr/etc/file/image.do?fileId=2315",
+      name: "AP 초기화 주문서",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/5050000/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -182,8 +182,8 @@ export const banItems = [
   },
   {
     user: {
-      name: "태삐",
-      imageUrl: "	https://www.avsec365.or.kr/etc/file/image.do?fileId=2316",
+      name: "SP 초기화 주문서",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/5050001/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -193,8 +193,8 @@ export const banItems = [
   },
   {
     user: {
-      name: "PTDD",
-      imageUrl: "	https://www.avsec365.or.kr/etc/file/image.do?fileId=2317",
+      name: "MSW 아바타 코디반지 (30일)",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/1112202/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -204,8 +204,8 @@ export const banItems = [
   },
   {
     user: {
-      name: "민",
-      imageUrl: "https://www.avsec365.or.kr/etc/file/image.do?fileId=2318",
+      name: "슬롯 확장권",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/5430000/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",
@@ -215,8 +215,8 @@ export const banItems = [
   },
   {
     user: {
-      name: "을숙도",
-      imageUrl: "https://www.avsec365.or.kr/etc/file/image.do?fileId=2319",
+      name: "고성능 확성기",
+      imageUrl: "https://maplestory.io/api/GMS/62/item/5072000/icon",
     },
     projectName: "ios-app",
     commit: "2d89f0c8",

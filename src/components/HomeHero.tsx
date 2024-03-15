@@ -18,17 +18,23 @@ import {
 } from "@heroicons/react/20/solid";
 import { activityItems, banItems, discord, endpoint } from "@/constants/const";
 import ItemDrawer from "./ItemDrawer";
-import { useChat } from "@/hooks/states";
+import {
+  useChat,
+  useItemId,
+  useItemSidebarOpened,
+  useSearchKeyword,
+} from "@/hooks/states";
+import { ItemList } from "./ItemList";
 
 const navigation = [
   { name: "통합검색", href: "#", icon: FolderIcon, current: true },
-  { name: "잠쩔", href: "#", icon: SignalIcon, current: false },
+  // { name: "잠쩔", href: "#", icon: SignalIcon, current: false },
   // { name: "경매장", href: "#", icon: ServerIcon, current: false },
 ];
 const teams = [
-  { id: 1, name: "Planetaria", href: "#", initial: "P", current: false },
-  { id: 2, name: "Protocol", href: "#", initial: "P", current: false },
-  { id: 3, name: "Tailwind Labs", href: "#", initial: "T", current: false },
+  // { id: 1, name: "Planetaria", href: "#", initial: "P", current: false },
+  // { id: 2, name: "Protocol", href: "#", initial: "P", current: false },
+  // { id: 3, name: "Tailwind Labs", href: "#", initial: "T", current: false },
 ];
 const statuses: { [key: string]: string } = {
   offline: "text-gray-500 bg-gray-100/10",
@@ -62,13 +68,14 @@ export default function HomeHero() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [rankingFlag, setRankingFlag] = useState(false);
   const { data: chat, setData: setChat } = useChat();
+  const { data: searchKeyword, setData: setSearchKeyword } = useSearchKeyword();
+  const { data: itemId, setData: setItemId } = useItemId();
 
   const fetcherChat = async (searchQuery: string) => {
     const chatParams: ChatParams = {
       content: searchQuery,
       macro: false, // 기본값 설정
     };
-
     const response = await fetch(endpoint + "search", {
       method: "POST",
       headers: {
@@ -80,6 +87,9 @@ export default function HomeHero() {
     const data: Chat[] = await response.json();
     setChat(data);
   };
+
+  const { data: itemSidebarOpened, setData: setItemSidebarOpened } =
+    useItemSidebarOpened();
 
   return (
     <>
@@ -142,11 +152,13 @@ export default function HomeHero() {
                       {/* Sidebar component, swap this element with another sidebar if you like */}
                       <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 ring-1 ring-white/10">
                         <div className="flex h-16 shrink-0 items-center">
-                          <img
-                            className="h-8 w-auto"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                            alt="Your Company"
-                          />
+                          <a href="/">
+                            <img
+                              className="h-8 w-auto cursor-pointer"
+                              src="/maple.png"
+                              alt="Your Company"
+                            />
+                          </a>
                         </div>
                         <nav className="flex flex-1 flex-col">
                           <ul
@@ -177,10 +189,10 @@ export default function HomeHero() {
                               </ul>
                             </li>
                             <li>
-                              <div className="text-xs font-semibold leading-6 text-gray-400">
+                              {/* <div className="text-xs font-semibold leading-6 text-gray-400">
                                 Your teams
-                              </div>
-                              <ul role="list" className="-mx-2 mt-2 space-y-1">
+                              </div> */}
+                              {/* <ul role="list" className="-mx-2 mt-2 space-y-1">
                                 {teams.map((team) => (
                                   <li key={team.name}>
                                     <a
@@ -201,7 +213,7 @@ export default function HomeHero() {
                                     </a>
                                   </li>
                                 ))}
-                              </ul>
+                              </ul> */}
                             </li>
                             <li className="-mx-6 mt-auto">
                               <a
@@ -210,11 +222,13 @@ export default function HomeHero() {
                               >
                                 <img
                                   className="h-8 w-8 rounded-full bg-gray-800"
-                                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                  src="/maple.png"
                                   alt=""
                                 />
                                 <span className="sr-only">내 프로필</span>
-                                <span aria-hidden="true">메랜이</span>
+                                <span aria-hidden="true">
+                                  로그인 기능 개발 예정
+                                </span>
                               </a>
                             </li>
                           </ul>
@@ -231,11 +245,13 @@ export default function HomeHero() {
               {/* Sidebar component, swap this element with another sidebar if you like */}
               <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-black/10 px-6 ring-1 ring-white/5">
                 <div className="flex h-16 shrink-0 items-center">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
+                  <a href="/">
+                    <img
+                      className="h-8 w-auto"
+                      src="/maple.png"
+                      alt="Your Company"
+                    />
+                  </a>
                 </div>
                 <nav className="flex flex-1 flex-col">
                   <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -263,10 +279,10 @@ export default function HomeHero() {
                       </ul>
                     </li>
                     <li>
-                      <div className="text-xs font-semibold leading-6 text-gray-400">
+                      {/* <div className="text-xs font-semibold leading-6 text-gray-400">
                         Your teams
-                      </div>
-                      <ul role="list" className="-mx-2 mt-2 space-y-1">
+                      </div> */}
+                      {/* <ul role="list" className="-mx-2 mt-2 space-y-1">
                         {teams.map((team) => (
                           <li key={team.name}>
                             <a
@@ -285,7 +301,7 @@ export default function HomeHero() {
                             </a>
                           </li>
                         ))}
-                      </ul>
+                      </ul> */}
                     </li>
                     <li className="-mx-6 mt-auto">
                       <a
@@ -294,11 +310,11 @@ export default function HomeHero() {
                       >
                         <img
                           className="h-8 w-8 rounded-full bg-gray-800"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          src="/maple.png"
                           alt=""
                         />
                         <span className="sr-only">내 프로필</span>
-                        <span aria-hidden="true">메랜이</span>
+                        <span aria-hidden="true">로그인 기능 개발 예정</span>
                       </a>
                     </li>
                   </ul>
@@ -332,10 +348,11 @@ export default function HomeHero() {
                       id="search-field"
                       className="block h-full w-full border-0 bg-transparent py-0 pl-8 pr-0 text-white focus:ring-0 sm:text-sm"
                       placeholder="찾으시는 아이템이나 유저를 검색해보세요"
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          fetcherChat(e.currentTarget.value);
-                        }
+                      value={searchKeyword}
+                      onChange={(e) => {
+                        setSearchKeyword(e.currentTarget.value);
+                        setItemSidebarOpened(false);
+                        fetcherChat(e.currentTarget.value);
                       }}
                     />
                   </div>
@@ -410,81 +427,15 @@ export default function HomeHero() {
                     </Transition>
                   </Menu>
                 </header>
-
+                <ItemList />
                 {/* Deployment list */}
-                <ul role="list" className="divide-y divide-white/5">
-                  {chat.map((chat, _i) => (
-                    <li
-                      key={_i}
-                      className="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8"
-                    >
-                      <div className="min-w-0 flex-auto">
-                        <div className="flex items-center gap-x-3">
-                          <div
-                            className={classNames(
-                              statuses[0],
-                              "flex-none rounded-full p-1"
-                            )}
-                          >
-                            <div className="h-2 w-2 rounded-full bg-current" />
-                          </div>
-                          <h2 className="min-w-0 text-sm font-semibold leading-6 text-white">
-                            <a
-                              href={
-                                discord +
-                                chat.guildId +
-                                "/" +
-                                chat.channelId +
-                                "/" +
-                                chat.msgId
-                              }
-                              target="_blank"
-                              className="flex gap-x-2"
-                            >
-                              <span className="truncate">
-                                {chat.globalName}
-                              </span>
-                              {/* <span className="text-gray-400">/</span> */}
-                              {/* <span className="whitespace-nowrap">
-                                {chat.userName}
-                              </span> */}
-                              <span className="absolute inset-0" />
-                            </a>
-                          </h2>
-                        </div>
-                        <div className="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-400">
-                          <p className="truncate">{chat.content}</p>
-                          <svg
-                            viewBox="0 0 2 2"
-                            className="h-0.5 w-0.5 flex-none fill-gray-300"
-                          >
-                            <circle cx={1} cy={1} r={1} />
-                          </svg>
-                          {/* <p className="whitespace-nowrap">{chat.guildId}</p> */}
-                        </div>
-                      </div>
-                      <div
-                        className={classNames(
-                          environments["Production"],
-                          "rounded-full flex-none py-1 px-2 text-xs font-medium ring-1 ring-inset"
-                        )}
-                      >
-                        {"채널 이동"}
-                      </div>
-                      <ChevronRightIcon
-                        className="h-5 w-5 flex-none text-gray-400"
-                        aria-hidden="true"
-                      />
-                    </li>
-                  ))}
-                </ul>
               </main>
 
               {/* Activity feed */}
               <aside className="lg:block hidden bg-black/10 lg:fixed lg:bottom-0 lg:right-0 lg:top-16 lg:w-96 lg:overflow-y-auto lg:border-l lg:border-white/5">
                 <header className="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
                   <h2 className="text-base font-semibold leading-7 text-white">
-                    {rankingFlag === false ? "아이템 랭킹" : "유저 랭킹"}
+                    {rankingFlag === false ? "아이템 랭킹" : "신규 아이템"}
                   </h2>
                   <a
                     href="#"
@@ -493,16 +444,18 @@ export default function HomeHero() {
                     }}
                     className="text-sm font-semibold leading-6 text-orange-400"
                   >
-                    {rankingFlag === false ? "유저 랭킹" : "아이템 랭킹"}
+                    {rankingFlag === false ? "신규 아이템" : "아이템 랭킹"}
                   </a>
                 </header>
                 <ul role="list" className="divide-y divide-white/5">
                   {(rankingFlag === false ? activityItems : banItems).map(
-                    (item) => (
+                    (item, _i) => (
                       <li
                         key={item.commit}
                         className="cursor-pointer hover:bg-gray-800 px-4 py-4 sm:px-6 lg:px-8"
-                        onClick={() => {}}
+                        onClick={() => {
+                          setSearchKeyword(activityItems[_i].user.name);
+                        }}
                       >
                         <div className="flex items-center gap-x-3">
                           <img

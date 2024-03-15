@@ -7,17 +7,19 @@ import {
   EllipsisVerticalIcon,
 } from "@heroicons/react/20/solid";
 import {
+  useChat,
   useCurrentItem,
   useItemId,
   useItemSidebarOpened,
   useSearchKeyword,
 } from "@/hooks/states";
+import { discord } from "@/constants/const";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 const environments: { [key: string]: string } = {
-  Yes: "text-green-400 bg-green-400/10 ring-gray-400/20",
+  Yes: "text-orange-400 bg-orange-400/10 ring-gray-400/20",
   No: "text-rose-400 bg-rose-400/10 ring-rose-400/30",
   Special: "text-violet-400 bg-violet-400/10 ring-violet-400/30",
   Approve: "text-orange-400 bg-orange-400/10 ring-orange-400/30",
@@ -31,16 +33,39 @@ function filterRules(rules: string[]): string[] {
   return [...priorityRules, ...otherRules].slice(0, 2);
 }
 export default function ItemDrawer() {
+  const highlightSearchKeyword = (content: string, keyword: string) => {
+    if (!keyword.trim()) {
+      return <span>{content}</span>;
+    }
+
+    const parts = (content || "").split(new RegExp(`(${keyword})`, "gi"));
+    return (
+      <span>
+        {parts.map((part, index) =>
+          part.toLowerCase() === keyword.toLowerCase() ? (
+            <span key={index} className="bg-orange-400">
+              {part}
+            </span>
+          ) : (
+            part // 검색어와 일치하지 않는 텍스트는 그대로 렌더링
+          )
+        )}
+      </span>
+    );
+  };
+
   const { data: itemSidebarOpened, setData: setItemSidebarOpened } =
     useItemSidebarOpened();
   const { data: currentItem, setData: setCurrentItem } = useCurrentItem();
   const { data: searchKeyword, setData: setSearchKeyword } = useSearchKeyword();
+  const { data: itemId, setData: setItemId } = useItemId();
 
   const statuses: { [key: string]: string } = {
     offline: "text-yellow-500 bg-yellow-100/10",
-    online: "text-green-400 bg-green-400/10",
+    online: "text-orange-400 bg-orange-400/10",
     error: "text-rose-400 bg-rose-400/10",
   };
+  const { data: chat, setData: setChat } = useChat();
 
   return (
     <Transition.Root show={itemSidebarOpened} as={Fragment}>
@@ -86,7 +111,7 @@ export default function ItemDrawer() {
                     <div>
                       <div className="pb-1 sm:pb-6">
                         <div>
-                          <div className="relative h-40 sm:h-56 overflow-x-auto flex flex-row bg-white">
+                          {/* <div className="relative h-40 sm:h-56 overflow-x-auto flex flex-row bg-white">
                             {Array.isArray((currentItem as any).exampleImg) &&
                             (currentItem as any).exampleImg.length === 0 ? (
                               <div className="flex items-center justify-center w-full h-full bg-gray-300 sm:w-96 dark:bg-gray-700">
@@ -113,45 +138,59 @@ export default function ItemDrawer() {
                                 )
                               )
                             )}
-                          </div>
+                          </div> */}
 
                           <div className="mt-6 px-4 sm:mt-8 sm:flex sm:items-end sm:px-6">
                             <div className="sm:flex-1">
                               <div>
                                 <div className="flex items-center">
-                                  <h3 className="text-xl font-bold text-white sm:text-2xl">
-                                    {(currentItem as any)?.korName ?? ""}
-                                  </h3>
+                                  <h2 className="text-lg font-bold text-white sm:text-lg">
+                                    채팅 내용
+                                  </h2>
                                 </div>
-                                {/* <p className="text-sm text-gray-500">
-                                  @ashleyporter
-                                </p> */}
+                                <p className="text-sm text-gray-500">
+                                  @{chat[itemId]?.globalName ?? "익명"}
+                                </p>
                               </div>
                               <div className="mt-5 flex flex-wrap space-y-3 sm:space-x-3 sm:space-y-0">
-                                <button
-                                  onClick={() => {
-                                    alert("나의 물품 담기 성공!");
-                                  }}
-                                  type="button"
-                                  className="gap-x-2 inline-flex w-full flex-shrink-0 items-center justify-center rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:flex-1"
+                                <a
+                                  className="w-full"
+                                  href={
+                                    discord +
+                                    (chat[itemId] || { guildId: "" }).guildId +
+                                    "/" +
+                                    (chat[itemId] || { channelId: "" })
+                                      .channelId +
+                                    "/" +
+                                    (chat[itemId] || { msbId: "" }).msgId
+                                  }
                                 >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    className="w-4 h-4"
+                                  <button
+                                    // onClick={() => {
+                                    //   alert("나의 물품 담기 성공!");
+                                    // }}
+                                    type="button"
+                                    className="gap-x-2 inline-flex w-full flex-shrink-0 items-center justify-center rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:flex-1"
                                   >
-                                    <path
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"
-                                    />
-                                  </svg>
-                                  담기
-                                </button>
-                                <button
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke-width="1.5"
+                                      stroke="currentColor"
+                                      className="w-4 h-4"
+                                    >
+                                      <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"
+                                      />
+                                    </svg>
+                                    채팅 채널 이동
+                                  </button>
+                                </a>
+
+                                {/* <button
                                   onClick={() => {
                                     const urlToCopy = `https://trippy.kr/check/${
                                       (currentItem as any)?.korName ?? ""
@@ -187,14 +226,21 @@ export default function ItemDrawer() {
                                       d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z"
                                     />
                                   </svg>
-                                  링크 복사하기
-                                </button>
+                                  
+                                </button> */}
                               </div>
+                              <p className="text-white mt-[16px] ">
+                                {highlightSearchKeyword(
+                                  chat[itemId]?.content.toString(),
+                                  searchKeyword
+                                )}
+                              </p>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div className=" pb-5 pt-5 sm:px-0 sm:pt-0">
+
+                      {/* <div className=" pb-5 pt-5 sm:px-0 sm:pt-0">
                         <dl className="px-8 sm:px-6 space-y-8  sm:space-y-6">
                           <div>
                             <dt
@@ -409,16 +455,13 @@ export default function ItemDrawer() {
                                 </div>
                               </div>
                               <div className="h-[150px]"></div>
-                              {/* <p className="text-sm text-gray-500">
-                                  @ashleyporter
-                                </p> */}
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
-                  <div className="sticky bottom-0 h-[60px] w-full">
+                  {/* <div className="sticky bottom-0 h-[60px] w-full">
                     <div className="grid grid-cols-[320px_auto] ">
                       <textarea
                         className="focus:ring-0 w-full resize-none border-0 bg-white"
@@ -428,7 +471,6 @@ export default function ItemDrawer() {
                           setComment(e.target.value);
                         }}
                       />
-                      {/* 전송 */}
                       <button
                         onClick={() => {}}
                         className="flex items-center justify-center cursor-pointer bg-[#0E131D]"
@@ -449,7 +491,7 @@ export default function ItemDrawer() {
                         </svg>
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
