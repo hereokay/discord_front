@@ -94,7 +94,7 @@ function ChatInput({ onNewMessages }) {
       }
 
       const data = await response.json();
-      console.log((data))
+      
       
       data.map((msg) =>{
         msg.content = highlightKeyword(msg.content,itemSearch,optionSearch);
