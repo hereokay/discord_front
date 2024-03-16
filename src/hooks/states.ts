@@ -59,3 +59,15 @@ export const useChat = () => {
     setData: mutate,
   };
 };
+
+export const useNotiOpened = () => {
+  const { data, mutate } = useSWRImmutable<boolean>("notiOpened", {
+    fallbackData: false,
+    revalidateOnReconnect: false,
+  });
+
+  return {
+    data: data || false,
+    setData: mutate,
+  };
+};

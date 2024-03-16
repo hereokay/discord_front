@@ -22,10 +22,12 @@ import {
   useChat,
   useItemId,
   useItemSidebarOpened,
+  useNotiOpened,
   useSearchKeyword,
 } from "@/hooks/states";
 import { ItemList } from "./ItemList";
 import DrawerContent from "./DrawerContent";
+import Notification from "./Notification";
 
 const navigation = [
   { name: "통합검색", href: "#", icon: FolderIcon, current: true },
@@ -66,6 +68,7 @@ function classNames(...classes: any) {
 }
 
 export default function HomeHero() {
+  const { data: notiOpened, setData: setNotiOpened } = useNotiOpened();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [rankingFlag, setRankingFlag] = useState(false);
   const { data: chat, setData: setChat } = useChat();
@@ -92,10 +95,22 @@ export default function HomeHero() {
   const { data: itemSidebarOpened, setData: setItemSidebarOpened } =
     useItemSidebarOpened();
 
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    if (notiOpened) {
+      // 3초 후에 알림을 자동으로 숨기기
+      timer = setTimeout(() => {
+        setNotiOpened(false);
+      }, 3000);
+    }
+    return () => clearTimeout(timer); // 컴포넌트가 언마운트되거나 notiOpened가 변경될 때 타이머 정리
+  }, [notiOpened, setNotiOpened]);
+
   return (
     <>
       <html className="h-full bg-gray-900">
         <ItemDrawer />
+        <Notification />
         <body className="h-full">
           <div>
             <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -333,7 +348,7 @@ export default function HomeHero() {
 
             <div className="xl:pl-72">
               {/* Sticky search header */}
-              <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8">
+              <div className="sticky top-0 z-0 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8">
                 <button
                   type="button"
                   className="-m-2.5 p-2.5 text-white xl:hidden"
@@ -356,7 +371,7 @@ export default function HomeHero() {
                       autoComplete="off"
                       id="search-field"
                       className="block h-full w-full border-0 bg-transparent py-0 pl-8 pr-0 text-white focus:ring-0 sm:text-sm"
-                      placeholder="찾으시는 아이템이나 유저를 검색해보세요"
+                      placeholder="찾으시는 아이템을 검색해보세요"
                       value={searchKeyword}
                       onChange={(e) => {
                         setChat([]);
@@ -398,7 +413,7 @@ export default function HomeHero() {
                     </Menu.Button> */}
                     <button
                       onClick={() => {
-                        alert("새로고침 ");
+                        setNotiOpened(true);
                         fetcherChat(searchKeyword);
                       }}
                       // onClick={() => {

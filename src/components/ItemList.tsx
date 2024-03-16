@@ -102,7 +102,7 @@ export function ItemList() {
         </svg>
 
         <p className="text-gray-300 text-center">
-          찾으시는 아이템이나 유저를 검색해보세요.
+          찾으시는 아이템을 검색해보세요.
         </p>
       </div>
     );
