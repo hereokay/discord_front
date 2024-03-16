@@ -257,7 +257,7 @@ export default function HomeHero() {
                   <a href="/">
                     <p className="ml-[8px] text-white font-semibold">
                       {" "}
-                      MapleSearch.KR
+                      <span className="text-orange-400">MapleSearch</span>.KR
                     </p>
                   </a>
                 </div>
