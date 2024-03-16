@@ -37,10 +37,10 @@ export default function Notification() {
                   </div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
                     <p className="text-sm font-medium text-gray-900">
-                      새로고침 성공!
+                      새로고침 요청!
                     </p>
                     <p className="mt-1 text-sm text-gray-500">
-                      찾으시는 정보가 업데이트 되었습니다.
+                      찾으시는 정보가 업데이트될때까지 잠시만 기다려주세요.
                     </p>
                   </div>
                   <div className="ml-4 flex flex-shrink-0">
