@@ -154,10 +154,16 @@ export default function HomeHero() {
                         <div className="flex h-16 shrink-0 items-center">
                           <a href="/">
                             <img
-                              className="h-8 w-auto cursor-pointer"
+                              className="h-8 w-auto"
                               src="/maple.png"
-                              alt="Your Company"
+                              alt="로고"
                             />
+                          </a>
+                          <a href="/">
+                            <p className="ml-[8px] text-white font-semibold">
+                              {" "}
+                              MapleSearch.KR
+                            </p>
                           </a>
                         </div>
                         <nav className="flex flex-1 flex-col">
@@ -246,11 +252,13 @@ export default function HomeHero() {
               <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-black/10 px-6 ring-1 ring-white/5">
                 <div className="flex h-16 shrink-0 items-center">
                   <a href="/">
-                    <img
-                      className="h-8 w-auto"
-                      src="/maple.png"
-                      alt="Your Company"
-                    />
+                    <img className="h-8 w-auto" src="/maple.png" alt="로고" />
+                  </a>
+                  <a href="/">
+                    <p className="ml-[8px] text-white font-semibold">
+                      {" "}
+                      MapleSearch.KR
+                    </p>
                   </a>
                 </div>
                 <nav className="flex flex-1 flex-col">

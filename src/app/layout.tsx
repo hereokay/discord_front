@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "메랜챗 - 메이플랜드 채팅 검색",
-  description: "디스코드 채팅 검색 서비스",
+  title: "메랜서치 - 메이플랜드 통합 검색",
+  description: "메이플랜드 통합 검색 서비스",
 };
 
 export default function RootLayout({
@@ -21,9 +21,9 @@ export default function RootLayout({
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
-        <meta property="og:title" content="메랜챗 - 메이플랜드 채팅 검색" />
+        <meta property="og:title" content="메랜서치 - 메이플랜드 통합 검색" />
         <meta property="og:url" content="https://maplesearch.kr/" />
-        <meta property="og:description" content="디스코드 채팅 검색 서비스" />
+        <meta property="og:description" content="메이플랜드 통합 검색 서비스" />
         <meta property="og:image" content="/og-image.png" />
         <link rel="favicon" href="./favicon.ico" />
         <link
