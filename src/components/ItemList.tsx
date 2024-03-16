@@ -39,10 +39,25 @@ export function ItemList() {
   const { data: itemSidebarOpened, setData: setItemSidebarOpened } =
     useItemSidebarOpened();
   const { data: chat, setData: setChat } = useChat();
+
+  function formatDateTime(dateTimeStr: string) {
+    const date = new Date(dateTimeStr);
+
+    // 월과 일을 구합니다. getMonth()는 0부터 시작하므로 1을 더해줍니다.
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    // 시간과 분을 구합니다.
+    const hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, "0"); // 분이 한 자리일 경우 앞에 0을 추가
+
+    // 원하는 형식으로 문자열을 반환합니다.
+    return `${month}/${day} ${hours}:${minutes}`;
+  }
   const fetcherChat = async (searchQuery: string) => {
     const chatParams: ChatParams = {
       content: searchQuery,
-      macro: false, // 기본값 설정
+      macro: true, // 기본값 설정
     };
     const response = await fetch(endpoint + "search", {
       method: "POST",
@@ -165,12 +180,13 @@ export function ItemList() {
               <div className="flex items-center gap-x-3">
                 <div
                   className={classNames(
-                    statuses["online"], // 동적 상태 적용
-                    "animate-pulse flex-none rounded-full p-1"
+                    environments["Yes"],
+                    "rounded-full flex-none py-1 px-2 text-xs font-medium ring-1 ring-inset"
                   )}
                 >
-                  <div className="h-2 w-2 rounded-full bg-current" />
+                  {formatDateTime(cur?.timeStamp.toString() ?? "날짜")}
                 </div>
+
                 <div className="flex flex-auto min-w-0">
                   <h2 className="min-w-0 text-sm font-semibold leading-6 text-white flex-auto overflow-hidden">
                     <a href={"#"} className="flex gap-x-2 items-center">

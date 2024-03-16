@@ -78,6 +78,21 @@ export default function ItemDrawer() {
   };
   const { data: chat, setData: setChat } = useChat();
 
+  function formatDateTime(dateTimeStr: string) {
+    const date = new Date(dateTimeStr);
+
+    // 월과 일을 구합니다. getMonth()는 0부터 시작하므로 1을 더해줍니다.
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    // 시간과 분을 구합니다.
+    const hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, "0"); // 분이 한 자리일 경우 앞에 0을 추가
+
+    // 원하는 형식으로 문자열을 반환합니다.
+    return `${month}/${day} ${hours}:${minutes}`;
+  }
+
   return (
     <Transition.Root show={itemSidebarOpened} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setItemSidebarOpened}>
@@ -159,9 +174,17 @@ export default function ItemDrawer() {
                                     채팅 내용
                                   </h2>
                                 </div>
-                                <p className="text-sm text-gray-500">
-                                  @{chat[itemId]?.globalName ?? "익명"}
-                                </p>
+                                <div className="flex justify-between">
+                                  <p className="text-sm text-gray-500">
+                                    @{chat[itemId]?.globalName ?? "익명"}
+                                  </p>
+                                  <p className="text-sm text-gray-500">
+                                    {formatDateTime(
+                                      chat[itemId]?.timeStamp.toString() ??
+                                        "날짜"
+                                    )}
+                                  </p>
+                                </div>
                               </div>
                               <div className="mt-5 flex flex-wrap space-y-3 sm:space-x-3 sm:space-y-0">
                                 <a
