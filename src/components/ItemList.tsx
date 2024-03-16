@@ -168,6 +168,10 @@ export function ItemList() {
 
         return (
           <li
+            onMouseOver={() => {
+              setItemId(_i);
+              setCurrentItem(cur);
+            }}
             onClick={() => {
               setItemSidebarOpened(true);
               setItemId(_i);
@@ -189,9 +193,9 @@ export function ItemList() {
 
                 <div className="flex flex-auto min-w-0">
                   <h2 className="min-w-0 text-sm font-semibold leading-6 text-white flex-auto overflow-hidden">
-                    <a href={"#"} className="flex gap-x-2 items-center">
-                      <span className="truncate">{cur.content}</span>
-                    </a>
+                    <span className="flex gap-x-2 items-center truncate ">
+                      {cur.content}
+                    </span>
                   </h2>
                 </div>
               </div>

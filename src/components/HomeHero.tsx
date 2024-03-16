@@ -25,6 +25,7 @@ import {
   useSearchKeyword,
 } from "@/hooks/states";
 import { ItemList } from "./ItemList";
+import DrawerContent from "./DrawerContent";
 
 const navigation = [
   { name: "통합검색", href: "#", icon: FolderIcon, current: true },
@@ -358,6 +359,7 @@ export default function HomeHero() {
                       placeholder="찾으시는 아이템이나 유저를 검색해보세요"
                       value={searchKeyword}
                       onChange={(e) => {
+                        setChat([]);
                         const value = e.currentTarget.value;
                         // 영문, 한글, 숫자, 그리고 공백을 허용하는 정규 표현식
                         const regex = /^[A-Za-z0-9가-힣ㄱ-ㅎㅏ-ㅣ\s]*$/;
@@ -452,51 +454,64 @@ export default function HomeHero() {
               </main>
 
               {/* Activity feed */}
-              <aside className="lg:block hidden bg-black/10 lg:fixed lg:bottom-0 lg:right-0 lg:top-16 lg:w-96 lg:overflow-y-auto lg:border-l lg:border-white/5">
-                <header className="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
-                  <h2 className="text-base font-semibold leading-7 text-white">
-                    {rankingFlag === false ? "아이템 랭킹" : "신규 아이템"}
-                  </h2>
-                  <a
-                    href="#"
-                    onClick={() => {
-                      setRankingFlag(!rankingFlag);
-                    }}
-                    className="text-sm font-semibold leading-6 text-orange-400"
-                  >
-                    {rankingFlag === false ? "신규 아이템" : "아이템 랭킹"}
-                  </a>
-                </header>
-                <ul role="list" className="divide-y divide-white/5">
-                  {(rankingFlag === false ? activityItems : banItems).map(
-                    (item, _i) => (
-                      <li
-                        key={item.commit}
-                        className="cursor-pointer hover:bg-gray-800 px-4 py-4 sm:px-6 lg:px-8"
+
+              <aside
+                className={`lg:block hidden bg-black/10 lg:fixed lg:bottom-0 lg:right-0 ${
+                  searchKeyword === "" || chat.length === 0
+                    ? "lg:top-16"
+                    : "lg:top-0"
+                } lg:w-96 lg:overflow-y-auto lg:border-l lg:border-white/5`}
+              >
+                {searchKeyword === "" || chat.length === 0 ? (
+                  <div>
+                    <header className="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
+                      <h2 className="text-base font-semibold leading-7 text-white">
+                        {rankingFlag === false ? "아이템 랭킹" : "신규 아이템"}
+                      </h2>
+                      <a
+                        href="#"
                         onClick={() => {
-                          // setSearchKeyword(activityItems[_i].user.name);
+                          setRankingFlag(!rankingFlag);
                         }}
+                        className="text-sm font-semibold leading-6 text-orange-400"
                       >
-                        <div className="flex items-center gap-x-3">
-                          <img
-                            src={item.user.imageUrl}
-                            alt=""
-                            className="h-6 w-6 flex-none rounded-full bg-gray-800"
-                          />
-                          <h3 className="flex-auto truncate text-sm font-semibold leading-6 text-white">
-                            {item.user.name}
-                          </h3>
-                          <time
-                            dateTime={item.dateTime}
-                            className="flex-none text-xs text-gray-600"
+                        {rankingFlag === false ? "신규 아이템" : "아이템 랭킹"}
+                      </a>
+                    </header>
+                    <ul role="list" className="divide-y divide-white/5">
+                      {(rankingFlag === false ? activityItems : banItems).map(
+                        (item, _i) => (
+                          <li
+                            key={item.commit}
+                            className="cursor-pointer hover:bg-gray-800 px-4 py-4 sm:px-6 lg:px-8"
+                            onClick={() => {
+                              // setSearchKeyword(activityItems[_i].user.name);
+                            }}
                           >
-                            {item.date}
-                          </time>
-                        </div>
-                      </li>
-                    )
-                  )}
-                </ul>
+                            <div className="flex items-center gap-x-3">
+                              <img
+                                src={item.user.imageUrl}
+                                alt=""
+                                className="h-6 w-6 flex-none rounded-full bg-gray-800"
+                              />
+                              <h3 className="flex-auto truncate text-sm font-semibold leading-6 text-white">
+                                {item.user.name}
+                              </h3>
+                              <time
+                                dateTime={item.dateTime}
+                                className="flex-none text-xs text-gray-600"
+                              >
+                                {item.date}
+                              </time>
+                            </div>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                ) : (
+                  <DrawerContent />
+                )}
               </aside>
             </div>
           </div>
