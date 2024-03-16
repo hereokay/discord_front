@@ -76,11 +76,10 @@ export function ItemList() {
     fetcherChat,
     {
       revalidateIfStale: false,
-      revalidateOnFocus: true,
-      revalidateOnReconnect: true,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
     }
   );
-
   if (searchKeyword === "")
     return (
       <div
@@ -163,7 +162,7 @@ export function ItemList() {
   }
   return (
     <ul role="list" className="divide-y divide-white/5">
-      {data.flat().map((cur: any, _i: number) => {
+      {chat.flat().map((cur: any, _i: number) => {
         // "X"의 개수에 따라 상태 설정
 
         return (
