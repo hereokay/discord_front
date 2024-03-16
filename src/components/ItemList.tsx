@@ -11,6 +11,8 @@ import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { LoaderList } from "./LoaderList";
 import { endpoint } from "@/constants/const";
 import useDebounce from "./useDebounce";
+import { discord } from "@/constants/const";
+
 
 // 상태별 스타일
 const statuses: { [key: string]: string } = {
@@ -35,12 +37,44 @@ export function ItemList() {
   const { data: itemId, setData: setItemId } = useItemId();
   const { data: searchKeyword, setData: setSearchKeyword } = useSearchKeyword();
   const { data: currentItem, setData: setCurrentItem } = useCurrentItem();
+  
   const debouncedSearchKeyword = useDebounce<string>(searchKeyword, 500);
   const { data: itemSidebarOpened, setData: setItemSidebarOpened } =
     useItemSidebarOpened();
   const { data: chat, setData: setChat } = useChat();
 
+
+  function highlightKeyword(content: string, keyword?: string, option?: string): string {
+      
+      content = content.replace(/[@┏━┓┛┗]/g, '');
+
+      // 키워드와 옵션이 없으면 원본 내용을 반환
+      if (!keyword && !option) return content;
+
+      let highlightedContent: string = content;
+
+      // 키워드를 공백으로 나누어 배열 생성
+      if (keyword) {
+          const keywords: string[] = keyword.split(" ");
+          keywords.forEach((word: string) => {
+              const keywordRegex: RegExp = new RegExp(`(${word})`, 'gi');
+              highlightedContent = highlightedContent.replace(keywordRegex, `<span style="color: yellow;">$1</span>`);
+          });
+      }
+
+
+      // 옵션 처리  
+      if (option) {
+          const optionRegex: RegExp = new RegExp(`(${option})`, 'gi');
+          highlightedContent = highlightedContent.replace(optionRegex, `<span style="color: green;">$1</span>`);
+      }
+      
+      
+      return highlightedContent;
+  }
+
   function formatDateTime(dateTimeStr: string) {
+    
     const date = new Date(dateTimeStr);
 
     // 월과 일을 구합니다. getMonth()는 0부터 시작하므로 1을 더해줍니다.
@@ -175,6 +209,14 @@ export function ItemList() {
               setItemSidebarOpened(true);
               setItemId(_i);
               setCurrentItem(cur);
+
+              window.open(discord +
+                (chat[itemId] || { guildId: "" }).guildId +
+                "/" +
+                (chat[itemId] || { channelId: "" }).channelId +
+                "/" +
+                (chat[itemId] || { msbId: "" }).msgId, '_blank', 'noopener,noreferrer');
+
             }}
             key={cur.id}
             className="cursor-pointer hover:bg-gray-800 relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8"
@@ -192,9 +234,8 @@ export function ItemList() {
 
                 <div className="flex flex-auto min-w-0">
                   <h2 className="min-w-0 text-sm font-semibold leading-6 text-white flex-auto overflow-hidden">
-                    <span className="flex gap-x-2 items-center truncate ">
-                      {cur.content}
-                    </span>
+                    <span className="flex gap-x-2 items-center truncate" dangerouslySetInnerHTML={{ __html: highlightKeyword(cur.content,searchKeyword) }}></span>
+
                   </h2>
                 </div>
               </div>
