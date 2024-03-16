@@ -350,10 +350,22 @@ export default function HomeHero() {
                       placeholder="찾으시는 아이템이나 유저를 검색해보세요"
                       value={searchKeyword}
                       onChange={(e) => {
-                        setSearchKeyword(e.currentTarget.value);
-                        setItemSidebarOpened(false);
-                        fetcherChat(e.currentTarget.value);
+                        const value = e.currentTarget.value;
+                        // 영문, 한글, 숫자, 그리고 공백을 허용하는 정규 표현식
+                        const regex = /^[A-Za-z0-9가-힣ㄱ-ㅎㅏ-ㅣ\s]*$/;
+
+                        if (regex.test(value)) {
+                          // 입력값이 정규 표현식에 맞는 경우에만 상태 업데이트
+                          setSearchKeyword(value);
+                          setItemSidebarOpened(false);
+                        }
                       }}
+                      // onKeyDown={(e) => {
+                      //   if (e.key === "Enter") {
+                      //     setSearchKeyword(e.currentTarget.value);
+                      //     setItemSidebarOpened(false);
+                      //   }
+                      // }}
                     />
                   </div>
                 </div>
@@ -362,7 +374,7 @@ export default function HomeHero() {
               <main className="lg:pr-96">
                 <header className="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
                   <h1 className="text-base font-semibold leading-7 text-white">
-                    대화 내용
+                    채팅 내용
                   </h1>
 
                   {/* Sort dropdown */}
@@ -454,7 +466,7 @@ export default function HomeHero() {
                         key={item.commit}
                         className="cursor-pointer hover:bg-gray-800 px-4 py-4 sm:px-6 lg:px-8"
                         onClick={() => {
-                          setSearchKeyword(activityItems[_i].user.name);
+                          // setSearchKeyword(activityItems[_i].user.name);
                         }}
                       >
                         <div className="flex items-center gap-x-3">
