@@ -157,7 +157,7 @@ export default function DrawerContent() {
                   <div>
                     <div className="flex items-center">
                       <h2 className="text-lg font-bold text-white sm:text-lg">
-                        채팅 내용
+                        채팅 내용ㄴ
                       </h2>
                     </div>
                     <div className="flex justify-between">

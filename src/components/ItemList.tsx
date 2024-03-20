@@ -93,12 +93,12 @@ export function ItemList() {
       content: searchQuery,
       macro: true, // 기본값 설정
     };
-    const response = await fetch(endpoint + "search", {
-      method: "POST",
+    const response = await fetch(endpoint + "search?keyword="+searchKeyword, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(chatParams),
+      // body: JSON.stringify(chatParams),
     });
 
     const data: Chat[] = await response.json();

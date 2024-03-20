@@ -227,5 +227,6 @@ export const banItems = [
   // More items...
 ];
 
-export const endpoint = "https://back.xn--c79ar4sw6b80j.com:8000/";
+// export const endpoint = "https://back.xn--c79ar4sw6b80j.com:8000/";
+export const endpoint = "http://localhost:80/";
 export const discord = "https://discord.com/channels/";
