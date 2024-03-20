@@ -399,7 +399,7 @@ export default function HomeHero() {
               <main className="lg:pr-96">
                 <header className="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
                   <h1 className="text-base font-semibold leading-7 text-white">
-                    공지 : 현재 서버 배포작업으로 인한 오류가 있을 수 있습니다.
+                    채팅내용
                   </h1>
 
                   {/* Sort dropdown */}
