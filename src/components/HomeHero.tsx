@@ -399,7 +399,7 @@ export default function HomeHero() {
               <main className="lg:pr-96">
                 <header className="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
                   <h1 className="text-base font-semibold leading-7 text-white">
-                    채팅내용
+                    운영종료, 이용해주신 많은 분들 감사합니다. 덕분에 많이 배울 수 있었습니다.
                   </h1>
 
                   {/* Sort dropdown */}
@@ -436,7 +436,7 @@ export default function HomeHero() {
                           d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
                         />
                       </svg>
-                      새로고침
+                      
                     </button>
                     <Transition
                       as={Fragment}
